@@ -1,0 +1,126 @@
+/* App.css */
+
+/* Root app container */
+.app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #1f1c2c, #928dab);
+    padding: 20px;
+  }
+  
+  /* Container for upload functionality */
+  .upload-container {
+    display: flex; /* Flexbox to align sections horizontally */
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 90%;
+    max-width: 1400px;
+    gap: 2rem; /* Spacing between Encrypt and Decrypt sections */
+  }
+  
+  /* Individual section for Encrypt or Decrypt */
+  .file-section {
+    flex: 1; /* Equal width for both sections */
+    background-color: #2b2b2b;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    text-align: center;
+  }
+  
+  /* Image inside each section */
+  .file-section img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Title for each section */
+  .file-section h2 {
+    color: #ffc107;
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  /* File input styling */
+  input[type="file"] {
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* Input fields for key and IV */
+  .inputField {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  /* Upload buttons */
+  .button {
+    background-color: #ffc107;
+    color: #2b2b2b;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #ff9800;
+    transform: scale(1.05);
+  }
+  
+  /* Success/Error messages */
+  .message {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #4caf50;
+  }
+  
+  /* Result block showing keys and IV */
+  .result {
+    background-color: #1d1d1d;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #ffc107;
+    font-size: 18px;
+    word-wrap: break-word;
+  }
+  
+  .result p {
+    margin: 8px 0;
+  }
+  
+  /* Download link styling */
+  .download {
+    background-color: #0066cc;
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .download:hover {
+    background-color: #004080;
+  }
+  

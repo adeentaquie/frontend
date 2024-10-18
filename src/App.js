@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './components/HomePage'; 
+import FileUpload from './FileUpload'; 
+import './styles/App.css'; 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <Router>
+            <div className="app-container">
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+
+                    <Route
+                        path="/upload"
+                        element={
+                            <div className="upload-container">
+                                <FileUpload
+                                    endpoint="http://localhost:5000/upload"
+                                    action="Encrypt"
+                                />
+                                <FileUpload
+                                    endpoint="http://localhost:5000/decrypt"
+                                    action="Decrypt"
+                                />
+                            </div>
+                        }
+                    />
+                </Routes>
+            </div>
+        </Router>
+    );
+};
 
 export default App;
