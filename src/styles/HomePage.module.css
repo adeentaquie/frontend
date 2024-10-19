@@ -56,7 +56,10 @@
     color: #4a4a4a;
     margin-bottom: 20px;
 }
-
+.buttonContent{
+    display: flex;
+    margin: 30px;
+}
 .encryptButton {
     background-color: #00c851;
     color: white;
@@ -66,9 +69,27 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 30px;
 }
 
 .encryptButton:hover {
+    background-color: #007e33;
+}
+.URLButton {
+    margin-left: 50 px;
+    background-color: #00c851;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 30px;
+    
+}
+
+.URLButton:hover {
     background-color: #007e33;
 }
 

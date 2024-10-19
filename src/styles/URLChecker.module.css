@@ -1,0 +1,71 @@
+/* src/styles/URLChecker.module.css */
+.container {
+    width: 100vh;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #000000, #2e294e, #000000);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #fff;
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #ffc107;
+    text-transform: uppercase;
+}
+
+.urlImage {
+    max-width: 400px;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.description {
+    max-width: 800px;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.inputRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.inputField {
+    width: 300px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    font-size: 1rem;
+}
+
+.checkButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkButton:hover {
+    background-color: #0056b3;
+}
+
+.message {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
