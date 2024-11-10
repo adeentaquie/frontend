@@ -15,21 +15,26 @@ const HomePage = () => {
     navigate("/check-url");
   };
 
+  const handlePasswordBasedEncryptionRedirect = () => {
+    navigate("/password-encrypt");
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.logo}>ENCRYPTION WEBAPP</div>
         <nav className={styles.navbar}>
-          <a href="#">Home</a>
-          <a href="#">FAQ's</a>
-          <a href="#">Contact Us</a>
-          <a href="#">Dashboard</a>
+          {/* Updated to use button elements for accessibility */}
+          <button onClick={() => navigate("/")} className={styles.navButton}>Home</button>
+          <button onClick={() => navigate("/faqs")} className={styles.navButton}>FAQ's</button>
+          <button onClick={() => navigate("/contact")} className={styles.navButton}>Contact Us</button>
+          <button onClick={() => navigate("/dashboard")} className={styles.navButton}>Dashboard</button>
         </nav>
       </header>
 
       <section className={styles.heroSection}>
         <div className={styles.heroContent}>
-          <h1>ENCRYPT / DECRYPT FILES </h1>
+          <h1>ENCRYPT / DECRYPT FILES</h1>
           <p>
             Experience peace of mind as you navigate the digital landscape,
             knowing that your information is shielded by the strongest layers of
@@ -47,6 +52,12 @@ const HomePage = () => {
               onClick={handleURLCheckerRedirect}
             >
               URL CHECKER
+            </button>
+            <button
+              className={styles.URLButton}
+              onClick={handlePasswordBasedEncryptionRedirect}
+            >
+              Password Based Encryption
             </button>
           </div>
         </div>
