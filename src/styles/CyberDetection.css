@@ -1,0 +1,97 @@
+/* Full-page container */
+.cyber-detection-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw; /* Full screen width */
+    background-color: black; /* Black background */
+    color: #fff; /* White text */
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 0; /* Remove any padding */
+    margin: 0; /* Remove any margins */
+    position: relative; /* For absolute positioning of the image */
+}
+
+/* Add image to the top-right corner */
+.cyber-detection-container img {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 100px;
+    height: auto;
+}
+
+/* Header styling */
+.cyber-detection-container h2 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #ffffff; /* White text */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Slight glow */
+}
+
+/* Form styling */
+.cyber-detection-container form {
+    width: 80%; /* Occupy 80% of the width */
+    max-width: 1000px; /* Limit max width for large screens */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8); /* Transparent background */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2); /* Subtle neon shadow */
+}
+
+/* Input field with neon effect */
+.cyber-detection-container input {
+    width: 90%; /* Wide input field */
+    padding: 15px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background: rgba(0, 0, 0, 0.9); /* Transparent black */
+    color: #fff;
+    box-shadow: 0 0 10px #0ff, 0 0 20px #0ff; /* Neon glow */
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Placeholder styling */
+.cyber-detection-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+}
+
+/* Button styling */
+.cyber-detection-container button {
+    width: 50%; /* Make button proportional to form */
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Gradient color */
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 125, 85, 0.5);
+    transition: all 0.3s ease;
+}
+
+.cyber-detection-container button:hover {
+    transform: scale(1.05); /* Slight scale effect */
+    box-shadow: 0 6px 20px rgba(255, 125, 85, 0.7); /* Enhanced shadow */
+}
+
+/* Prediction result styling */
+.cyber-detection-container p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #0ff; /* Neon cyan */
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff; /* Neon glow */
+    margin-top: 20px;
+}

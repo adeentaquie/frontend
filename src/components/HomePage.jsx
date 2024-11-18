@@ -1,4 +1,3 @@
-// src/components/HomePage.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/HomePage.module.css"; // Adjust path if needed
@@ -19,12 +18,15 @@ const HomePage = () => {
     navigate("/password-encrypt");
   };
 
+  const handleCyberDetectionRedirect = () => {
+    navigate("/cyber-detection"); // Redirect to Cyber Detection module
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.logo}>ENCRYPTION WEBAPP</div>
         <nav className={styles.navbar}>
-          {/* Updated to use button elements for accessibility */}
           <button onClick={() => navigate("/")} className={styles.navButton}>Home</button>
           <button onClick={() => navigate("/faqs")} className={styles.navButton}>FAQ's</button>
           <button onClick={() => navigate("/contact")} className={styles.navButton}>Contact Us</button>
@@ -58,6 +60,13 @@ const HomePage = () => {
               onClick={handlePasswordBasedEncryptionRedirect}
             >
               Password Based Encryption
+            </button>
+            {/* New Button for Cyber Detection */}
+            <button
+              className={styles.URLButton}
+              onClick={handleCyberDetectionRedirect}
+            >
+              Cyber Detection
             </button>
           </div>
         </div>

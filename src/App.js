@@ -4,6 +4,7 @@ import HomePage from "./components/HomePage";
 import FileUpload from "./FileUpload";
 import URLChecker from "./URLChecker";
 import PasswordEncryptDecrypt from "./PasswordEncryptDecrypt";
+import CyberDetection from "./CyberDetection"; // Import the new CyberDetection module
 import "./styles/App.css";
 
 const App = () => {
@@ -46,6 +47,8 @@ const App = () => {
               />
             }
           />
+          {/* Add the new CyberDetection route */}
+          <Route path="/cyber-detection" element={<CyberDetection />} />
         </Routes>
       </div>
     </Router>
