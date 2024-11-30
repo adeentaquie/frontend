@@ -67,23 +67,25 @@ const FileUpload = ({ endpoint, action }) => {
   };
 
   const handleSendEmail = async () => {
-    if (!recipientEmail || !uploadedFilePath) {
-      setMessage("Please provide recipient email and upload a file first.");
-      return;
+    if (!recipientEmail || !uploadedFilePath || !encryptionDetails) {
+        setMessage("Please provide recipient email and upload an encrypted file first.");
+        return;
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/send-email", {
-        recipientEmail,
-        filePath: uploadedFilePath, // Use the stored file path here
-      });
+        const response = await axios.post("http://localhost:5000/send-email", {
+            recipientEmail,
+            filePath: uploadedFilePath, // Use the stored file path
+            key: encryptionDetails.key, // Send the key
+            iv: encryptionDetails.iv,   // Send the IV
+        });
 
-      setMessage(response.data);
+        setMessage(response.data);
     } catch (error) {
-      console.error("Email error:", error.message);
-      setMessage("Error: " + (error.response?.data || error.message));
+        console.error("Email error:", error.message);
+        setMessage("Error: " + (error.response?.data || error.message));
     }
-  };
+};
 
   return (
     <div className={styles.container}>
