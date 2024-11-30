@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './styles/PasswordEncryptDecrypt.module.css';
 
-const PasswordEncryptDecrypt = ({ endpoint }) => {
+const PasswordEncryptDecrypt = () => {
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState('');
     const [password, setPassword] = useState('');
@@ -28,6 +28,15 @@ const PasswordEncryptDecrypt = ({ endpoint }) => {
 
     const handleFileChange = (e) => {
         const chosenFile = e.target.files[0];
+        const allowedTypes = ['image/png', 'image/jpeg', 'text/plain']; // Supported MIME types
+
+        if (chosenFile && !allowedTypes.includes(chosenFile.type)) {
+            alert("Unsupported file type. Please upload a text or image file.");
+            setFile(null);
+            setFileName('');
+            return;
+        }
+
         setFile(chosenFile);
         setFileName(chosenFile ? chosenFile.name : '');
     };
@@ -36,55 +45,96 @@ const PasswordEncryptDecrypt = ({ endpoint }) => {
 
     const handleEncryptDecrypt = async () => {
         const formData = new FormData();
-        formData.append('password', password);
-        formData.append('email', email);
-
+    
+        // Action: Encrypt
         if (action === "Encrypt") {
-            if (!file || !email) {
-                alert("Please select a file and provide an email address for encryption.");
+            if (!file || !password || !email) {
+                alert("Please select a file, provide a password, and enter an email address for encryption.");
                 return;
             }
+    
+            formData.append('password', password);
+            formData.append('email', email);
             formData.append('fileData', file);
             formData.append('filename', file.name);
-
+    
             try {
                 const response = await fetch(`http://localhost:5002/encrypt-with-password`, {
                     method: 'POST',
                     body: formData,
                 });
-
-                const data = await response.json();
-                setResult(response.ok ? "File encrypted and email sent successfully." : `Encryption failed: ${data.error}`);
+    
+                if (response.ok) {
+                    await response.json(); // No need to store this if not used
+                    setResult("File encrypted and email sent successfully.");
+                } else {
+                    const data = await response.json();
+                    setResult(`Encryption failed: ${data.error}`);
+                }
             } catch (error) {
+                console.error("Encryption error:", error);
                 setResult("Encryption failed due to a network error.");
             }
-        } else {
+        }
+        // Action: Decrypt
+        else {
+            if (!password) {
+                alert("Please provide a password for decryption.");
+                return;
+            }
+    
+            formData.append('password', password);
+    
             try {
                 const response = await fetch(`http://localhost:5002/decrypt-with-password`, {
                     method: 'POST',
                     body: formData,
                 });
-
-                const data = await response.json();
-
+    
                 if (response.ok) {
-                    setResult("File decrypted successfully.");
-                    const blob = new Blob([data.decryptedData], { type: 'text/plain' });
+                    const contentDisposition = response.headers.get('Content-Disposition');
+                    const fileName = contentDisposition
+                        ? contentDisposition.split('filename=')[1].replace(/"/g, '')
+                        : 'decrypted_file';
+    
+                    const contentType = response.headers.get('Content-Type');
+                    const blob = await response.blob();
+    
                     const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = data.filename || 'decrypted_file.txt';
-                    a.click();
-                    URL.revokeObjectURL(url);
+    
+                    // Handle image-specific download
+                    if (contentType.startsWith('image/')) {
+                        const img = new Image();
+                        img.src = url;
+                        img.onload = () => {
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = fileName;
+                            a.click();
+                            URL.revokeObjectURL(url);
+                        };
+                    }
+                    // Handle other file types
+                    else {
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = fileName;
+                        a.click();
+                        URL.revokeObjectURL(url);
+                    }
+    
+                    setResult("File decrypted successfully.");
                 } else {
-                    console.error("Decryption failed:", data.error);
+                    const data = await response.json();
                     setResult(`Decryption failed: ${data.error}`);
                 }
             } catch (error) {
+                console.error("Decryption error:", error);
                 setResult("Decryption failed due to a network error.");
             }
         }
     };
+    
 
     return (
         <div className={styles.container}>
@@ -108,7 +158,7 @@ const PasswordEncryptDecrypt = ({ endpoint }) => {
                         onChange={handleFileChange}
                         className={styles.hiddenFileInput}
                     />
-                    {fileName && <p className={styles.fileName}>{fileName}</p>} {/* Display the selected file name */}
+                    {fileName && <p className={styles.fileName}>{fileName}</p>}
                     <input
                         type="email"
                         placeholder="Enter your email"
@@ -129,11 +179,7 @@ const PasswordEncryptDecrypt = ({ endpoint }) => {
             <button onClick={handleEncryptDecrypt} className={styles.button}>
                 {action}
             </button>
-            {result && (
-                <div className={styles.message}>
-                    {result}
-                </div>
-            )}
+            {result && <div className={styles.message}>{result}</div>}
         </div>
     );
 };
